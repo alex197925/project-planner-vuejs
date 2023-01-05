@@ -3,17 +3,29 @@
 <template>
   <div class="project">
     <div class="actions">
-      <h3>{{ project.title }}</h3>
+      <h3 @click="toggleText">{{ project.title }}</h3>
       <!-- Here will be all icons  -->
     </div>
     <div class="details">
-      <p>{{ project.details }}</p>
+      <p v-if="isHidden">{{ project.details }}</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      isHidden: false,
+    };
+  },
+
+  methods: {
+    toggleText() {
+      this.isHidden = !this.isHidden;
+    },
+  },
+
   props: ["project"],
 };
 </script>
