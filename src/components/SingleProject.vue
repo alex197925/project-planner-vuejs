@@ -5,9 +5,14 @@
     <div class="actions">
       <h3 @click="toggleText">{{ project.title }}</h3>
       <!-- Here will be all icons  -->
+      <div class="icons">
+        <span class="material-icons"> edit </span>
+        <span class="material-icons"> delete </span>
+        <span class="material-icons"> done </span>
+      </div>
     </div>
     <div class="details">
-      <p v-if="isHidden">{{ project.details }}</p>
+      <p v-if="isShowing">{{ project.details }}</p>
     </div>
   </div>
 </template>
@@ -16,13 +21,13 @@
 export default {
   data() {
     return {
-      isHidden: false,
+      isShowing: false,
     };
   },
 
   methods: {
     toggleText() {
-      this.isHidden = !this.isHidden;
+      this.isShowing = !this.isShowing;
     },
   },
 
