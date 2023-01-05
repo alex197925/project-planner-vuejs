@@ -1,7 +1,13 @@
 <!-- @format -->
 
 <template>
-  <div class="home">Home</div>
+  <div class="home">
+    <div v-if="projects.length">
+      <div v-for="project in projects" :key="project.id">
+        <p>{{ project.title }}</p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -13,10 +19,12 @@ export default {
 
   data() {
     return {
+      // Here all projects
       projects: [],
     };
   },
 
+  // Fetching data from data/db.json and updating projects[]
   mounted() {
     fetch(" http://localhost:3000/projects")
       .then((res) => res.json())
