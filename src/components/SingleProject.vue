@@ -7,7 +7,7 @@
       <!-- Here will be all icons  -->
       <div class="icons">
         <span class="material-icons"> edit </span>
-        <span class="material-icons"> delete </span>
+        <span @click="deleteProject" class="material-icons"> delete </span>
         <span class="material-icons"> done </span>
       </div>
     </div>
@@ -19,9 +19,11 @@
 
 <script>
 export default {
+  props: ["project"],
   data() {
     return {
       isShowing: false,
+      url: "http://localhost:3000/projects/" + this.project.id,
     };
   },
 
@@ -29,9 +31,14 @@ export default {
     toggleText() {
       this.isShowing = !this.isShowing;
     },
-  },
 
-  props: ["project"],
+    // Send delete request to the database with fetch
+    deleteProject() {
+      fetch(this.url, { method: "DELETE" })
+        .then(() => this.$emit("delete", this.project.id))
+        .catch((err) => console.log(err));
+    },
+  },
 };
 </script>
 
