@@ -48,7 +48,11 @@ export default {
         headers: { "Content-Type": "application/json" },
         // Here we send data with json data
         body: JSON.stringify({ complete: !this.project.complete }),
-      });
+      })
+        .then(() => {
+          this.$emit("complete", this.project.id);
+        })
+        .catch((err) => console.log(err));
     },
   },
 };
