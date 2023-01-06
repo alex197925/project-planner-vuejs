@@ -22,7 +22,27 @@ export default {
   },
   methods: {
     handleSubmit() {
-      console.log(this.title, this.details);
+      // Create new project object
+      //   We don't have to add "id"
+      let project = {
+        title: this.title,
+        details: this.details,
+        complete: false,
+      };
+      //   console.log(project);
+      // Sending json to the data base
+      fetch("http://localhost:3000/projects", {
+        // Use method POST
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        // Sending created project
+        body: JSON.stringify(project),
+      })
+        .then(() => {
+          // Redirect after submitting the form to the home page
+          this.$router.push("/");
+        })
+        .catch((err) => console.log(err));
     },
   },
 };
