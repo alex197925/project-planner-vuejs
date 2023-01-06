@@ -8,7 +8,7 @@
       <div class="icons">
         <span class="material-icons"> edit </span>
         <span @click="deleteProject" class="material-icons"> delete </span>
-        <span class="material-icons"> done </span>
+        <span @click="toggleComplete" class="material-icons"> done </span>
       </div>
     </div>
     <div class="details">
@@ -37,6 +37,18 @@ export default {
       fetch(this.url, { method: "DELETE" })
         .then(() => this.$emit("delete", this.project.id))
         .catch((err) => console.log(err));
+    },
+    //Updating only property "complete" in db.json
+    toggleComplete() {
+      // Fetching base url
+      fetch(this.url, {
+        // Use method PATCH
+        method: "PATCH",
+        // Preparing to send data with this request, type of json
+        headers: { "Content-Type": "application/json" },
+        // Here we send data with json data
+        body: JSON.stringify({ complete: !this.project.complete }),
+      });
     },
   },
 };
