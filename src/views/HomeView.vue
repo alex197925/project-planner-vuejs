@@ -33,6 +33,7 @@ export default {
   },
 
   methods: {
+    // Deleting and updating locale.
     handleDelete(id) {
       this.projects = this.projects.filter((product) => {
         return product.id !== id;
