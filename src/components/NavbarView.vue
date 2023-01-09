@@ -3,8 +3,8 @@
 <template>
   <nav class="main-nav">
     <!-- Use single quot for 'Home' -->
-    <router-link :to="{ name: 'Home' }">Home</router-link>
-    <router-link :to="{ name: 'AddProject' }">Add Project</router-link>
+    <router-link :to="{ name: 'Home' }">Projects</router-link>
+    <router-link :to="{ name: 'AddProject' }">Add a New Project</router-link>
   </nav>
 </template>
 
