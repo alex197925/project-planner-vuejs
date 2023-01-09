@@ -20,6 +20,7 @@ const routes = [
     path: "/projects/:id",
     name: "EditProject",
     component: EditProjectViewVue,
+    props: true,
   },
 ];
 
