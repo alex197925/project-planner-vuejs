@@ -3,7 +3,7 @@
 <template>
   <div>
     <h1>Edit project</h1>
-    <form>
+    <form @submit.prevent="handleSubmit">
       <label>Title:</label>
       <input type="text" required v-model="title" />
       <label>Details:</label>
@@ -20,17 +20,31 @@ export default {
     return {
       title: "",
       details: "",
-      uri: " http://localhost:3000/projects/" + this.id,
+      url: " http://localhost:3000/projects/" + this.id,
     };
   },
 
   mounted() {
-    fetch(this.uri)
+    fetch(this.url)
       .then((res) => res.json())
       .then((data) => {
         this.title = data.title;
         this.details = data.details;
       });
+  },
+
+  methods: {
+    handleSubmit() {
+      fetch(this.url, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: this.title, details: this.details }),
+      })
+        .then(() => {
+          this.$router.push("/");
+        })
+        .catch((err) => console.log(err));
+    },
   },
 };
 </script>
