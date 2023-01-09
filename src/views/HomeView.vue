@@ -2,6 +2,7 @@
 
 <template>
   <div class="home">
+    <FilterNavView @filterChange="current = $event" :current="current" />
     <div v-if="projects.length">
       <div v-for="project in projects" :key="project.id">
         <SingleProject
@@ -16,15 +17,18 @@
 
 <script>
 import SingleProject from "../components/SingleProject.vue";
+import FilterNavView from "@/components/FilterNavView.vue";
 
 export default {
   name: "HomeView",
-  components: { SingleProject },
+  components: { SingleProject, FilterNavView },
 
   data() {
     return {
       // Here all projects
       projects: [],
+      // Tracking value of selected button
+      current: "all",
     };
   },
 
