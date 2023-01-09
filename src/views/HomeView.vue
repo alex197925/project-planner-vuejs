@@ -3,8 +3,9 @@
 <template>
   <div class="home">
     <FilterNavView @filterChange="current = $event" :current="current" />
+
     <div v-if="projects.length">
-      <div v-for="project in projects" :key="project.id">
+      <div v-for="project in filteredProjects" :key="project.id">
         <SingleProject
           :project="project"
           @delete="handleDelete"
@@ -30,6 +31,18 @@ export default {
       // Tracking value of selected button
       current: "all",
     };
+  },
+
+  computed: {
+    filteredProjects() {
+      if (this.current === "completed") {
+        return this.projects.filter((project) => project.complete);
+      }
+      if (this.current === "ongoing") {
+        return this.projects.filter((project) => !project.complete);
+      }
+      return this.projects;
+    },
   },
 
   // Fetching data from data/db.json and updating projects[]
